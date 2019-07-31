@@ -8,15 +8,12 @@
  *
  */
 function formatTime(time, type) {
+  const addZero = num => (num < 10 ? `0${num}` : num);
   let hour = time.getHours();
   let minute = time.getMinutes();
-  const z = hour > 12 ? 'PM' : 'AM';
-  if (type == 12) {
-    hour = hour > 12 ? hour - 12 : hour;
-  }
-  hour = hour > 10 ? hour : `0${hour}`;
-  minute = minute > 10 ? minute : `0${minute}`;
-  return type == 12 ? `${hour}:${minute} ${z}` : `${hour}:${minute}`;
+  if (type === 24) return `${hour}:${minute}`;
+  if (hour > 12) return `${addZero(hour - 12)}:${addZero(minute)} PM`;
+  return `${addZero(hour)}:${addZero(minute)} AM`;
 }
 
 /**
